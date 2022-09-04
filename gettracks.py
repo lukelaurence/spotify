@@ -26,12 +26,13 @@ def geturl(album=None,track=None,artist=None,year=None,upc=None,hipster=None,new
 	results = sp.search(q=query_string,limit=1,type='track')
 	return results['tracks']['items'][0]['external_urls']['spotify']
 
-with open('songs.txt','r') as f:
-	with open('songurls.txt','x') as f2:
-		sys.stdout = f2
-		for x in f:
-			p = x.find('(')
-			track = x[:p-1]
-			year = x[p+1:p+5]
-			artist = x[p+8:].title()
-			print(geturl(track=track,artist=artist))
+def geturls():
+	with open('songs.txt','r') as f:
+		with open('songurls.txt','x') as f2:
+			sys.stdout = f2
+			for x in f:
+				p = x.find('(')
+				print(geturl(track=x[:p-1],year=x[p+1:p+5],artist=x[p+8:].title()))
+
+if __name__ == "__main__":
+	geturls()
