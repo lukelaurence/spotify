@@ -1,4 +1,4 @@
-import os, random
+import os,random,sys
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from spotifycredentials import set_credentials
@@ -22,6 +22,17 @@ def getrandomurl(input,hipster=False):
 	song = random.choice(sp.album_tracks(album['external_urls']['spotify'])['items'])
 	print(song['external_urls']['spotify'])
 
-characters = [x for x in '0123456789abcdefghijklmnopqrstuvwxyz']
-for x in range(100):
-	getrandomurl(random.choice(characters),hipster=True)
+characters = [x for x in 'abcdefghijklmnopqrstuvwxyz']
+# greek = [x for x in 'ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ']
+# russian = [x for x in 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ']
+# gurmukhi = [x for x in 'ਅਸਹਕਖਗਘਚਜਤਨਪਫਬਮਰਲਵ']
+# katakana = [x for x in "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"]
+# hiragana = [x for x in "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをんっゝ"]
+
+def getsongs(number):
+	with open("songs.txt",'w') as f:
+		sys.stdout = f
+		for x in range(number):
+			getrandomurl(random.choice(characters),hipster=random.randint(0,1))
+
+getsongs(100)
