@@ -1,4 +1,4 @@
-import os,random,sys
+import os,random,sys,datetime
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from spotifycredentials import set_credentials
@@ -30,9 +30,9 @@ characters = [x for x in 'abcdefghijklmnopqrstuvwxyz']
 # hiragana = [x for x in "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをんっゝ"]
 
 def getsongs(number):
-	with open("songs.txt",'w') as f:
+	with open(f"{datetime.datetime.now()}.txt",'x') as f:
 		sys.stdout = f
 		for x in range(number):
 			getrandomurl(random.choice(characters),hipster=random.randint(0,1))
 
-getsongs(100)
+getsongs(10)
